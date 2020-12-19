@@ -1,0 +1,29 @@
+{
+  "name": "game-aircraft-battle",
+  "version": "1.0.0",
+  "description": "基于vue3 的 canvas 游戏",
+  "main": "main.js",
+  "scripts": {
+    "serve": "webpack-dev-server --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fuarmy/game-aircraft-battle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fuarmy/game-aircraft-battle/issues"
+  },
+  "homepage": "https://github.com/Fuarmy/game-aircraft-battle#readme",
+  "devDependencies": {
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@vue/runtime-core": "^3.0.4"
+  }
+}
