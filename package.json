@@ -18,12 +18,13 @@
     "url": "https://github.com/Fuarmy/game-aircraft-battle/issues"
   },
   "homepage": "https://github.com/Fuarmy/game-aircraft-battle#readme",
+  "dependencies": {
+    "@vue/runtime-core": "3.0.0-rc.5",
+    "pixi.js": "^5.3.5"
+  },
   "devDependencies": {
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "@vue/runtime-core": "^3.0.4"
   }
 }

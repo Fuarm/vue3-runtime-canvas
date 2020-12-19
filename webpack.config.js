@@ -9,10 +9,6 @@ module.exports = {
     },
     devtool: "source-map",
     devServer: {
-        contentBase: path.resolve(__dirname, "dist"),
-        hot: true
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+        contentBase: path.resolve(__dirname, "dist")
+    }
 }
