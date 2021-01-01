@@ -4,7 +4,8 @@ import GamePage from "./pages/GamePage";
 
 export default defineComponent({
     setup(props, ctx) {
-        const currentPageName = ref("StartPage");
+        // 使用 ref 创建响应式对象
+        const currentPageName = ref("GamePage");
         const currentPage = computed(() => {
             let page;
             switch(currentPageName.value) {
