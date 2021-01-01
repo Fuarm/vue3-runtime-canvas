@@ -4,7 +4,6 @@ import mapImg from "../assets/map.jpg";
 
 export default defineComponent({
     setup(props, ctx) {
-        console.log(game)
         const viewHeight = game.view.clientHeight;
         const mapY1 = ref(0), mapY2 = ref(-viewHeight);
 
