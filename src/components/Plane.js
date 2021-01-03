@@ -1,5 +1,5 @@
 import { defineComponent, h, toRefs } from "@vue/runtime-core";
-import planeImg from "../assets/plane.png";
+import planeImg from "../assets/images/plane.png";
 
 export default defineComponent({
     props: ["x", "y"],

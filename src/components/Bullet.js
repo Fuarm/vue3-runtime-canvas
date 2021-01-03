@@ -1,5 +1,5 @@
 import { defineComponent, h, toRefs } from "@vue/runtime-core";
-import bulletImg from "../assets/bullet.png";
+import bulletImg from "../assets/images/bullet.png";
 
 export default defineComponent({
     props: ["x", "y"],

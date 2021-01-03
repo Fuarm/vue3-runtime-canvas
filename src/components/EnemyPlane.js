@@ -1,5 +1,5 @@
 import { defineComponent, h, toRefs } from "@vue/runtime-core";
-import enemyPlaneImg from "../assets/enemy.png";
+import enemyPlaneImg from "../assets/images/enemy.png";
 
 export default defineComponent({
     props: ["x", "y"],

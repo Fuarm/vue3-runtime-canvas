@@ -1,6 +1,6 @@
 import { h, defineComponent } from "@vue/runtime-core";
-import endPageImg from "../assets/end_page.jpg";
-import restartBtnImg from "../assets/restartBtn.png";
+import endPageImg from "../assets/images/end_page.jpg";
+import restartBtnImg from "../assets/images/restartBtn.png";
 
 export default defineComponent({
     setup(props, ctx) {

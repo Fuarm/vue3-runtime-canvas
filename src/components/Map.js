@@ -1,6 +1,6 @@
 import { defineComponent, h, ref } from "@vue/runtime-core";
 import { game } from "../Game";
-import mapImg from "../assets/map.jpg";
+import mapImg from "../assets/images/map.jpg";
 
 export default defineComponent({
     setup(props, ctx) {
