@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Fuarmy/game-aircraft-battle#readme",
   "dependencies": {
+    "@tweenjs/tween.js": "^18.6.4",
     "@vue/runtime-core": "3.0.0-rc.5",
     "pixi.js": "^5.3.5"
   },

@@ -1,4 +1,5 @@
 import { h, defineComponent, reactive, onMounted, onUnmounted } from "@vue/runtime-core";
+import TWEEN from "@tweenjs/tween.js";
 import Map from "../components/Map";
 import Plane from "../components/Plane";
 import EnemyPlane from "../components/EnemyPlane";
@@ -14,6 +15,7 @@ export default defineComponent({
         const { enemyPlanes } = useCreateEnemyPlanes();
         // 我方子弹
         const { bullets, addBullet } = useCreateBullets();
+        
 
         const onAttack = (bulletInfo) => {
             addBullet(bulletInfo);
@@ -45,6 +47,7 @@ export default defineComponent({
 
 function useFighting(enemyPlanes, planeInfo, emit, bullets) {
     const handleTicker = () => {
+        TWEEN.update();
         enemyPlanes.forEach((enemyInfo) => {
             enemyInfo.y++;
             // 碰撞检测--矩形碰撞
@@ -84,13 +87,21 @@ function useCreateBullets() {
 }
 
 function useCreateEnemyPlanes() {
-    const enemyPlanes = reactive([{ x: 0, y: 0, width: 308, height: 207 }]);
+    const enemyPlanes = reactive([{ x: 0, y: 0, width: 300, height: 200 }]);
     return { enemyPlanes };
 }
 
 function useCreatePlane() {
-    const planeInfo = reactive({ x: 350, y: 750, width:  258, height: 364});
-
+    const planeInfo = reactive({ x: game.view.clientWidth * 0.45, y: game.view.clientHeight, width:  248, height: 348});
+    // 缓动出场
+    new TWEEN.Tween({x: planeInfo.x, y: planeInfo.y })
+        .to({ y: planeInfo.y - 250 }, 500)
+        .start()
+        .onUpdate((obj) => {
+            planeInfo.x = obj.x;
+            planeInfo.y = obj.y;
+        });
+    
     const speed = 15;
     window.addEventListener("keydown", (e) => {
         switch (e.code) {
@@ -108,5 +119,6 @@ function useCreatePlane() {
                 break;
         }
     });
+   
     return { planeInfo };
 }
