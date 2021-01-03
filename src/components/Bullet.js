@@ -1,5 +1,5 @@
 import { defineComponent, h, toRefs } from "@vue/runtime-core";
-import enemyPlaneImg from "../assets/enemy.png";
+import bulletImg from "../assets/bullet.png";
 
 export default defineComponent({
     props: ["x", "y"],
@@ -9,7 +9,7 @@ export default defineComponent({
     },
     render(ctx) {
         return h("Container", { x: ctx.x, y: ctx.y }, [
-            h("Sprite", {texture: enemyPlaneImg})
+            h("Sprite", {texture: bulletImg})
         ]);
     }
 })
