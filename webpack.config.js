@@ -1,5 +1,4 @@
 const path = require("path");
-const { webpack } = require("webpack");
 
 module.exports = {
     entry: path.resolve(__dirname, "src/main.js"),
@@ -7,7 +6,7 @@ module.exports = {
         filename: "main.bundle.js",
         path: path.resolve(__dirname, "dist")
     },
-    devtool: "source-map",
+    devtool: "inline-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, "public")
     },
