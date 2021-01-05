@@ -22,15 +22,14 @@ export default defineComponent({
             }
             return page;
         });
-        return { currentPageName, currentPage };
+        const onChangePage = (page) => {
+          currentPageName.value = page;
+        }
+        return { currentPage, onChangePage };
     },
     render(ctx) {
         return h("Container", [
-            h(ctx.currentPage, {
-                onChangePage(page) {
-                    ctx.currentPageName = page;
-                }
-            })
+            h(ctx.currentPage, { onChangePage: ctx.onChangePage })
         ]);
     }
 });
