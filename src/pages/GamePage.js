@@ -12,16 +12,21 @@ export default defineComponent({
         // 响应式对象--引用类型 reactive
         const { planeInfo } = useCreatePlane();
         // 敌方飞机
-        const { enemyPlanes } = useCreateEnemyPlanes();
+        const { enemyPlanes, addEnemyPlanes } = useCreateEnemyPlanes();
         // 我方子弹
         const { bullets, addBullet } = useCreateBullets();
         
-
         const onAttack = (bulletInfo) => {
             addBullet(bulletInfo);
         };
 
-        useFighting(enemyPlanes, planeInfo, emit, bullets);
+        const { handleTicker } = useFighting(enemyPlanes, planeInfo, emit, bullets);
+        onMounted(() => {
+            game.ticker.add(handleTicker);
+        });
+        onUnmounted(() => {
+            game.ticker.remove(handleTicker);
+        });
         
         return { planeInfo, enemyPlanes, bullets, onAttack };
     },
@@ -70,12 +75,7 @@ function useFighting(enemyPlanes, planeInfo, emit, bullets) {
             });
         });
     };
-    onMounted(() => {
-        game.ticker.add(handleTicker);
-    });
-    onUnmounted(() => {
-        game.ticker.remove(handleTicker);
-    });
+    return { handleTicker };
 }
 
 function useCreateBullets() {
@@ -87,8 +87,11 @@ function useCreateBullets() {
 }
 
 function useCreateEnemyPlanes() {
-    const enemyPlanes = reactive([{ x: 0, y: 0, width: 300, height: 200 }]);
-    return { enemyPlanes };
+    const enemyPlanes = reactive([]);
+    const addEnemyPlanes = (info) => {
+        enemyPlanes.push({...info, width: 300, height: 200 });
+    };
+    return { enemyPlanes, addEnemyPlanes };
 }
 
 function useCreatePlane() {
@@ -102,7 +105,7 @@ function useCreatePlane() {
             planeInfo.y = obj.y;
         });
     
-    const speed = 15;
+    const speed = 5;
     window.addEventListener("keydown", (e) => {
         switch (e.code) {
             case "ArrowUp":
