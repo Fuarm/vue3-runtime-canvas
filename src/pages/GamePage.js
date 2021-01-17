@@ -97,7 +97,7 @@ function useCreateEnemyPlanes() {
 }
 
 function useCreatePlane() {
-    const planeInfo = reactive({ x: game.view.clientWidth * 0.45, y: game.view.clientHeight, ...enemyPlane });
+    const planeInfo = reactive({ x: game.view.clientWidth * 0.45, y: game.view.clientHeight, ...plane });
     // 缓动出场
     new TWEEN.Tween({x: planeInfo.x, y: planeInfo.y })
         .to({ y: planeInfo.y - 250 }, 500)
