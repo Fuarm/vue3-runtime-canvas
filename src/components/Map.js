@@ -1,5 +1,6 @@
 import { defineComponent, h, ref } from "@vue/runtime-core";
 import { game } from "../Game";
+import { map } from "../config/index.js";
 import mapImg from "../assets/images/map.jpg";
 
 export default defineComponent({
@@ -7,7 +8,7 @@ export default defineComponent({
         const viewHeight = game.view.clientHeight;
         const mapY1 = ref(0), mapY2 = ref(-viewHeight);
 
-        const speed = 5;
+        const { speed } = map;
         game.ticker.add(() => {
             mapY1.value += speed;
             mapY2.value += speed;

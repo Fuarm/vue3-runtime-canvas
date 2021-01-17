@@ -6,7 +6,7 @@ import EndPage from "./pages/EndPage";
 export default defineComponent({
     setup(props, ctx) {
         // 使用 ref 创建响应式对象
-        const currentPageName = ref("StartPage");
+        const currentPageName = ref("GamePage");
         const currentPage = computed(() => {
             let page;
             switch(currentPageName.value) {

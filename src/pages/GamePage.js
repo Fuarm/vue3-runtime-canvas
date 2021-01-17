@@ -6,6 +6,7 @@ import EnemyPlane from "../components/EnemyPlane";
 import Bullet from "../components/Bullet";
 import { game } from "../Game";
 import { hitTestObject } from '../utils/index';
+import { plane, enemyPlane, bullet } from "../config/index.js";
 
 export default defineComponent({
     setup(props, { emit }) {
@@ -15,10 +16,11 @@ export default defineComponent({
         const { enemyPlanes, addEnemyPlanes } = useCreateEnemyPlanes();
         // 我方子弹
         const { bullets, addBullet } = useCreateBullets();
-        
-        const onAttack = (bulletInfo) => {
-            addBullet(bulletInfo);
-        };
+
+        // setInterval(() => {
+        //     const x = Math.floor((1 + stage.width) * Math.random());
+        //     addEnemyPlanes({x, y: 100});
+        // }, 600);
 
         const { handleTicker } = useFighting(enemyPlanes, planeInfo, emit, bullets);
         onMounted(() => {
@@ -28,7 +30,7 @@ export default defineComponent({
             game.ticker.remove(handleTicker);
         });
         
-        return { planeInfo, enemyPlanes, bullets, onAttack };
+        return { planeInfo, enemyPlanes, bullets };
     },
     render(ctx) {
         const createEnemyPlanes = () => {
@@ -43,7 +45,7 @@ export default defineComponent({
         }
         return h("Container", [
             h(Map),
-            h(Plane, { x: ctx.planeInfo.x, y: ctx.planeInfo.y, onAttack: ctx.onAttack }),
+            h(Plane, { x: ctx.planeInfo.x, y: ctx.planeInfo.y }),
             ...createEnemyPlanes(),
             ...createBullets()
         ]);
@@ -81,7 +83,7 @@ function useFighting(enemyPlanes, planeInfo, emit, bullets) {
 function useCreateBullets() {
     const bullets = reactive([]);
     const addBullet = (info) => {
-        bullets.push({...info, width: 40,  height: 70 });
+        bullets.push({...info, ...bullet });
     };
     return { bullets, addBullet };
 }
@@ -89,13 +91,13 @@ function useCreateBullets() {
 function useCreateEnemyPlanes() {
     const enemyPlanes = reactive([]);
     const addEnemyPlanes = (info) => {
-        enemyPlanes.push({...info, width: 300, height: 200 });
+        enemyPlanes.push({...info, ...enemyPlane });
     };
     return { enemyPlanes, addEnemyPlanes };
 }
 
 function useCreatePlane() {
-    const planeInfo = reactive({ x: game.view.clientWidth * 0.45, y: game.view.clientHeight, width:  248, height: 348});
+    const planeInfo = reactive({ x: game.view.clientWidth * 0.45, y: game.view.clientHeight, ...enemyPlane });
     // 缓动出场
     new TWEEN.Tween({x: planeInfo.x, y: planeInfo.y })
         .to({ y: planeInfo.y - 250 }, 500)
@@ -105,23 +107,23 @@ function useCreatePlane() {
             planeInfo.y = obj.y;
         });
     
-    const speed = 5;
-    window.addEventListener("keydown", (e) => {
-        switch (e.code) {
-            case "ArrowUp":
-                planeInfo.y -= speed;
-                break;
-            case "ArrowDown":
-                planeInfo.y += speed;
-                break;
-            case "ArrowLeft":
-                planeInfo.x -= speed;
-                break;
-            case "ArrowRight":
-                planeInfo.x += speed;
-                break;
-        }
-    });
+    // const speed = 5;
+    // window.addEventListener("keydown", (e) => {
+    //     switch (e.code) {
+    //         case "ArrowUp":
+    //             planeInfo.y -= speed;
+    //             break;
+    //         case "ArrowDown":
+    //             planeInfo.y += speed;
+    //             break;
+    //         case "ArrowLeft":
+    //             planeInfo.x -= speed;
+    //             break;
+    //         case "ArrowRight":
+    //             planeInfo.x += speed;
+    //             break;
+    //     }
+    // });
    
     return { planeInfo };
 }
